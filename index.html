@@ -715,7 +715,7 @@ footer {
 <nav class="nav">
   <div class="nav-logo">Beautiful Mistake</div>
   <div class="nav-links">
-    <a class="nav-link" href="#accidents">Accidents</a>
+    <a class="nav-link" href="#accidents">Unexpected Mistakes</a>
     <a class="nav-link" href="#reframe">Reframe</a>
     <button class="nav-cta" onclick="document.getElementById('reframe').scrollIntoView({behavior:'smooth',block:'start'})">Try it →</button>
   </div>
@@ -729,7 +729,7 @@ footer {
     <p class="hero-body">Every serendipity wears the costume of catastrophe at first. The finest discoveries — and the finest lives — often begin with something going gloriously, unexpectedly wrong.</p>
     <div class="hero-cta">
       <button class="btn-ink" onclick="document.getElementById('reframe').scrollIntoView({behavior:'smooth',block:'start'})">Reframe your mistake →</button>
-      <a class="btn-ghost" href="#accidents">See the accidents</a>
+      <a class="btn-ghost" href="#accidents">See the beautiful mistakes</a>
     </div>
   </div>
 
@@ -753,7 +753,7 @@ footer {
 <!-- ACCIDENTS -->
 <section class="section" id="accidents">
   <div class="section-header">
-    <h2 class="section-title">Accidents that changed the world</h2>
+    <h2 class="section-title">Beautiful Mistakes that changed the world</h2>
     <span class="section-count">12 discoveries</span>
   </div>
   <div class="cards-grid" id="cards"></div>
@@ -764,7 +764,7 @@ footer {
   <div class="reframe-inner">
     <div class="reframe-label">Your turn</div>
     <h2 class="reframe-heading">What was <em>your</em><br>beautiful mistake?</h2>
-    <p class="reframe-sub">Describe it in your own words. The AI reads what you actually wrote — not keywords — and writes a reframe specific to your situation.</p>
+    <p class="reframe-sub">Describe it in your own words. We will reframe it to make it your own beautiful mistake.</p>
 
     <div class="input-wrap" id="inputWrap">
       <input class="mistake-input" id="mistakeInput" type="text" placeholder="I quit my job on impulse to travel…" maxlength="200">
@@ -910,7 +910,7 @@ Respond with ONLY a JSON object:
 
 Rules: be specific not generic. Be warm not clinical. Acknowledge the difficulty briefly. Output ONLY valid JSON.`;
 
- const res = await fetch('/api/reframe', {
+const res = await fetch('/api/reframe', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ mistakeText, system })
