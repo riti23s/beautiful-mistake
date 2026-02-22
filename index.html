@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Most Beautiful Mistake</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white:   #ffffff;
+  --paper:   #faf7ff;
+  --ink:     #0d0d12;
+  --mid:     #554d6b;
+  --faint:   #e2daf5;
+  --gold:    #f59e0b;
+  --slate:   #4f46e5;
+  --sage:    #059669;
+  --warm:    #db2777;
+  --violet:  #7c3aed;
+  --cyan:    #0891b2;
+  --rose:    #f43f5e;
+  --amber:   #d97706;
+  --radius:  2px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top:0; left:0; right:0;
+  height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--faint);
+  z-index: 200;
+}
+.nav-logo {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.nav-links { display:flex; gap:32px; align-items:center; }
+.nav-link {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--ink); }
+.nav-cta {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 1px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.nav-cta:hover { color: var(--mid); border-color: var(--mid); }
+
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  padding-top: 60px;
+  display: grid;
+  grid-template-columns: 55% 45%;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 80px 100px 80px;
+  border-right: 1px solid var(--faint);
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.2s;
+}
+
+h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(4rem, 6.5vw, 7.5rem);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  opacity: 0;
+  animation: fadeUp 0.9s ease forwards 0.35s;
+}
+h1 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--violet), var(--rose));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-body {
+  margin-top: 40px;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--mid);
+  max-width: 400px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.7s;
+}
+
+.hero-cta {
+  margin-top: 52px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.9s;
+}
+
+.btn-ink {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, var(--violet), var(--slate)); color: var(--white);
+  border: none; border-radius: var(--radius);
+  padding: 15px 32px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer; text-decoration: none;
+  transition: background 0.25s, transform 0.15s;
+}
+.btn-ink:hover { background: linear-gradient(135deg, #6d28d9, #3730a3); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(124,58,237,0.3); }
+
+.btn-ghost {
+  font-size: 0.82rem; font-weight: 400;
+  color: var(--mid);
+  text-decoration: none;
+  border-bottom: 1px solid var(--faint);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ── HERO RIGHT ── */
+.hero-right {
+  background: linear-gradient(135deg, #ede9fe 0%, #dbeafe 40%, #ecfdf5 75%, #fdf4ff 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-large-word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(9rem, 18vw, 22rem);
+  line-height: 1;
+  color: rgba(17,17,16,0.05);
+  user-select: none;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hero-pill-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--faint);
+  border-radius: 100px;
+  padding: 12px 20px;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--ink);
+  width: fit-content;
+  animation: pillSlide 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+  opacity: 0;
+}
+.pill:nth-child(1) { animation-delay: 0.6s; margin-left: 0; }
+.pill:nth-child(2) { animation-delay: 0.75s; margin-left: 24px; }
+.pill:nth-child(3) { animation-delay: 0.9s; margin-left: 12px; }
+.pill:nth-child(4) { animation-delay: 1.05s; margin-left: 36px; }
+.pill:nth-child(5) { animation-delay: 1.2s; margin-left: 8px; }
+@keyframes pillSlide {
+  from { opacity:0; transform: translateX(-16px); }
+  to   { opacity:1; transform: translateX(0); }
+}
+
+.pill-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.pill:nth-child(1) .pill-dot { background: var(--violet); box-shadow: 0 0 6px rgba(124,58,237,0.5); }
+.pill:nth-child(2) .pill-dot { background: var(--rose); box-shadow: 0 0 6px rgba(244,63,94,0.5); }
+.pill:nth-child(3) .pill-dot { background: var(--amber); box-shadow: 0 0 6px rgba(217,119,6,0.5); }
+.pill:nth-child(4) .pill-dot { background: var(--cyan); box-shadow: 0 0 6px rgba(8,145,178,0.5); }
+.pill:nth-child(5) .pill-dot { background: var(--sage); box-shadow: 0 0 6px rgba(5,150,105,0.5); }
+
+.pill-year {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: var(--mid);
+  padding-left: 12px;
+  border-left: 1px solid var(--faint);
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  border-top: 1px solid var(--faint);
+  border-bottom: 1px solid var(--faint);
+  overflow: hidden;
+  padding: 18px 0;
+  background: var(--ink);
+}
+.marquee-track {
+  display: flex; width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee-item {
+  display: flex; align-items: center; gap: 24px;
+  padding: 0 24px;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+}
+.marquee-sep { color: var(--violet); font-style: normal; font-size: 0.55rem; opacity: 0.7; }
+@keyframes marquee { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+
+/* ── ACCIDENTS SECTION ── */
+.section { padding: 120px 80px; max-width: 1280px; margin: 0 auto; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 64px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--faint);
+}
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-count {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--mid);
+  letter-spacing: 0.06em;
+}
+
+/* ── CARDS ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--faint);
+}
+.card {
+  padding: 44px 40px;
+  border-right: 1px solid var(--faint);
+  border-bottom: 1px solid var(--faint);
+  transition: background 0.2s;
+  cursor: default;
+  position: relative;
+}
+.card:nth-child(3n) { border-right: none; }
+.card:hover { background: #f5f0ff; }
+
+.card-index {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--faint);
+  margin-bottom: 24px;
+  display: block;
+}
+.card-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.card-year {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 20px;
+}
+.card-desc {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+}
+.card-accent {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  transition: width 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.card:hover .card-accent { width: 100%; }
+.card:nth-child(6n+1) .card-accent { background: var(--violet); }
+.card:nth-child(6n+2) .card-accent { background: var(--cyan); }
+.card:nth-child(6n+3) .card-accent { background: var(--amber); }
+.card:nth-child(6n+4) .card-accent { background: var(--rose); }
+.card:nth-child(6n+5) .card-accent { background: var(--sage); }
+.card:nth-child(6n+6) .card-accent { background: var(--slate); }
+
+/* ── REFRAME SECTION ── */
+.reframe-section {
+  background: linear-gradient(160deg, #faf7ff 0%, #f0f9ff 100%);
+  border-top: 3px solid var(--violet);
+}
+.reframe-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 120px 48px;
+}
+
+.reframe-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 20px;
+}
+.reframe-heading {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+.reframe-heading em { font-style: italic; color: var(--mid); }
+
+.reframe-sub {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.75;
+  margin-bottom: 56px;
+  max-width: 480px;
+}
+
+.input-wrap {
+  background: var(--white);
+  border: 1.5px solid var(--faint);
+  border-radius: var(--radius);
+  display: flex;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-bottom: 12px;
+}
+.input-wrap:focus-within {
+  border-color: var(--violet);
+  box-shadow: 0 0 0 4px rgba(124,58,237,0.15);
+}
+.input-wrap.shake { animation: shake 0.4s ease; border-color: var(--warm); }
+
+.mistake-input {
+  flex: 1;
+  background: transparent; border: none;
+  padding: 18px 24px;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink);
+  outline: none;
+}
+.mistake-input::placeholder { color: var(--faint); }
+
+.transform-btn {
+  background: var(--violet); color: var(--white);
+  border: none; border-left: none;
+  padding: 18px 28px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem; font-weight: 500;
+  cursor: pointer; white-space: nowrap;
+  transition: background 0.2s;
+  display: flex; align-items: center; gap: 8px;
+  min-width: 148px; justify-content: center;
+}
+.transform-btn:hover:not(:disabled) { background: #6d28d9; box-shadow: 0 4px 16px rgba(124,58,237,0.35); }
+.transform-btn:disabled { background: var(--faint); color: var(--mid); cursor: not-allowed; }
+
+.spinner {
+  width: 14px; height: 14px;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.input-hint {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--mid);
+}
+
+@keyframes shake { 0%,100%{transform:translateX(0);} 20%{transform:translateX(-5px);} 40%{transform:translateX(5px);} 60%{transform:translateX(-3px);} 80%{transform:translateX(3px);} }
+
+/* ── REVELATION ── */
+.revelation { margin-top: 48px; display: none; }
+.revelation.visible { display: block; animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1); }
+
+.rev-card {
+  background: var(--white);
+  border: 1px solid var(--faint);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(124,58,237,0.08);
+}
+
+.rev-bar {
+  height: 3px;
+  background: linear-gradient(90deg, #7c3aed, #0891b2, #059669, #f59e0b, #db2777);
+}
+
+.rev-body { padding: 44px 48px 36px; }
+
+.rev-label {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mid); margin-bottom: 28px;
+}
+.rev-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--violet); flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(124,58,237,0.5);
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.7);} }
+
+.rev-original {
+  font-size: 0.88rem; font-style: italic;
+  color: var(--faint); text-decoration: line-through;
+  margin-bottom: 16px; font-weight: 300;
+}
+
+.rev-headline {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+.rev-rule { height: 1px; background: var(--faint); margin-bottom: 28px; }
+
+.rev-reflection {
+  font-size: 0.95rem; font-weight: 300;
+  line-height: 1.8; color: var(--mid);
+  font-style: italic;
+}
+
+.rev-footer {
+  padding: 20px 48px;
+  background: var(--paper);
+  border-top: 1px solid var(--faint);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+
+.rev-tag {
+  font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: linear-gradient(135deg, var(--violet), var(--rose));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.download-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--violet);
+  border: 1.5px solid var(--violet); border-radius: 100px;
+  padding: 8px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem; font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  opacity: 0; pointer-events: none;
+  transform: translateY(6px);
+}
+.download-btn.show {
+  opacity: 1; pointer-events: auto; transform: translateY(0);
+  transition: opacity 0.5s 0.4s, transform 0.5s 0.4s, background 0.2s, color 0.2s;
+}
+.download-btn:hover { background: var(--violet); color: #fff; box-shadow: 0 4px 12px rgba(124,58,237,0.3); }
+
+.save-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.download-btn-li { border-color: #0077b5; color: #0077b5; }
+.download-btn-li:hover { background: #0077b5 !important; color: #fff !important; box-shadow: 0 4px 12px rgba(0,119,181,0.3) !important; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(17,17,16,0.6);
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: auto; }
+
+.modal-box {
+  background: var(--white);
+  border-radius: 6px;
+  width: 100%; max-width: 560px;
+  overflow: hidden;
+  transform: translateY(20px) scale(0.98);
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.18);
+}
+.modal-overlay.open .modal-box { transform: translateY(0) scale(1); }
+
+.modal-head {
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid var(--faint);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-title {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.modal-close {
+  background: none; border: none; cursor: pointer;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--mid); font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.modal-close:hover { background: var(--paper); color: var(--ink); }
+
+.canvas-area { padding: 20px 28px; background: var(--paper); }
+
+.canvas-wrap {
+  width: 100%; aspect-ratio: 1;
+  overflow: hidden; border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+.canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+
+.modal-controls { padding: 20px 28px; border-top: 1px solid var(--faint); }
+
+.theme-label {
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mid); margin-bottom: 12px;
+}
+
+.theme-swatches { display: flex; gap: 8px; margin-bottom: 20px; }
+
+.swatch {
+  flex: 1; height: 44px; border-radius: 3px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.swatch:hover { transform: translateY(-2px); }
+.swatch.active { border-color: var(--ink); }
+.swatch-label {
+  position: absolute; bottom: 4px; left: 0; right: 0;
+  text-align: center;
+  font-size: 0.6rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* Swatch previews */
+.sw-ivory   { background: #faf6ee; }
+.sw-ivory .swatch-label { color: #6b6860; }
+.sw-slate   { background: #1e3448; }
+.sw-slate .swatch-label { color: rgba(255,255,255,0.7); }
+.sw-stone   { background: #2d2926; }
+.sw-stone .swatch-label { color: rgba(255,255,255,0.7); }
+.sw-sage    { background: #e8f0e8; }
+.sw-sage .swatch-label { color: #3a5c3e; }
+.sw-dusk    { background: linear-gradient(135deg, #1a1a2e, #2d1b4e); }
+.sw-dusk .swatch-label { color: rgba(255,255,255,0.7); }
+
+.modal-dl {
+  width: 100%;
+  background: linear-gradient(135deg, var(--violet), var(--slate)); color: var(--white);
+  border: none; border-radius: var(--radius);
+  padding: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem; font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 4px 16px rgba(124,58,237,0.25);
+}
+.modal-dl:hover { background: linear-gradient(135deg, #6d28d9, #3730a3); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(124,58,237,0.35); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 48px 80px;
+  border-top: 1px solid var(--faint);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.78rem; color: var(--mid);
+}
+.footer-brand {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1rem;
+  background: linear-gradient(135deg, var(--violet), var(--rose));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── PARTICLES ── */
+.particle {
+  position: fixed; pointer-events: none; z-index: 999;
+  animation: floatUp linear forwards; opacity: 0;
+}
+@keyframes floatUp {
+  0%   { opacity:0; transform:translateY(0) rotate(0deg); }
+  10%  { opacity:0.8; }
+  90%  { opacity:0.3; }
+  100% { opacity:0; transform:translateY(-100vh) rotate(540deg); }
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 80px 40px; border-right: none; border-bottom: 1px solid var(--faint); }
+  .hero-right { min-height: 300px; padding: 40px; }
+  .section { padding: 80px 32px; }
+  .cards-grid { grid-template-columns: 1fr 1fr; }
+  .card:nth-child(3n) { border-right: 1px solid var(--faint); }
+  .card:nth-child(2n) { border-right: none; }
+  .reframe-inner { padding: 80px 32px; }
+  footer { padding: 40px 32px; flex-direction: column; gap: 8px; text-align: center; }
+  .nav { padding: 0 24px; }
+  .nav-links { display: none; }
+}
+@media(max-width:600px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .card { border-right: none !important; }
+  .input-wrap { flex-direction: column; }
+  .transform-btn { border-left: none; border-top: 1px solid var(--faint); width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Beautiful Mistake</div>
+  <div class="nav-links">
+    <a class="nav-link" href="#accidents">Accidents</a>
+    <a class="nav-link" href="#reframe">Reframe</a>
+    <button class="nav-cta" onclick="document.getElementById('reframe').scrollIntoView({behavior:'smooth',block:'start'})">Try it →</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="eyebrow">On the gift of things going wrong</div>
+    <h1>The Most<br><em>Beautiful</em><br>Mistake</h1>
+    <p class="hero-body">Every serendipity wears the costume of catastrophe at first. The finest discoveries — and the finest lives — often begin with something going gloriously, unexpectedly wrong.</p>
+    <div class="hero-cta">
+      <button class="btn-ink" onclick="document.getElementById('reframe').scrollIntoView({behavior:'smooth',block:'start'})">Reframe your mistake →</button>
+      <a class="btn-ghost" href="#accidents">See the accidents</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-large-word">Oops.</div>
+    <div class="hero-pill-stack">
+      <div class="pill"><div class="pill-dot"></div>Teflon<span class="pill-year">1938</span></div>
+      <div class="pill"><div class="pill-dot"></div>Post-it Notes<span class="pill-year">1968</span></div>
+      <div class="pill"><div class="pill-dot"></div>X-Rays<span class="pill-year">1895</span></div>
+      <div class="pill"><div class="pill-dot"></div>The Pacemaker<span class="pill-year">1956</span></div>
+      <div class="pill"><div class="pill-dot"></div>Velcro<span class="pill-year">1941</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- ACCIDENTS -->
+<section class="section" id="accidents">
+  <div class="section-header">
+    <h2 class="section-title">Accidents that changed the world</h2>
+    <span class="section-count">12 discoveries</span>
+  </div>
+  <div class="cards-grid" id="cards"></div>
+</section>
+
+<!-- REFRAME -->
+<section class="reframe-section" id="reframe">
+  <div class="reframe-inner">
+    <div class="reframe-label">Your turn</div>
+    <h2 class="reframe-heading">What was <em>your</em><br>beautiful mistake?</h2>
+    <p class="reframe-sub">Describe it in your own words. The AI reads what you actually wrote — not keywords — and writes a reframe specific to your situation.</p>
+
+    <div class="input-wrap" id="inputWrap">
+      <input class="mistake-input" id="mistakeInput" type="text" placeholder="I quit my job on impulse to travel…" maxlength="200">
+      <button class="transform-btn" id="transformBtn">Reframe it →</button>
+    </div>
+    <p class="input-hint">Try: a relationship, a career move, something you said, a risk, a missed chance…</p>
+
+    <div class="revelation" id="revelation">
+      <div class="rev-card">
+        <div class="rev-bar"></div>
+        <div class="rev-body">
+          <div class="rev-label"><div class="rev-dot"></div><span id="revLabel">AI Reframed</span></div>
+          <div class="rev-original" id="mistakeOld"></div>
+          <div class="rev-headline" id="mistakeNew"></div>
+          <div class="rev-rule"></div>
+          <div class="rev-reflection" id="mistakeNote"></div>
+        </div>
+        <div class="rev-footer">
+          <span class="rev-tag" id="mistakeTag"></span>
+          <div class="save-btns">
+            <button class="download-btn" id="downloadIgBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              Instagram
+            </button>
+            <button class="download-btn download-btn-li" id="downloadLiBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              LinkedIn
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title" id="modalTitle">Instagram post — 1080 × 1080</div>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="canvas-area">
+      <div class="canvas-wrap" id="canvasWrap">
+        <canvas id="igCanvas" width="1080" height="1080"></canvas>
+      </div>
+    </div>
+    <div class="modal-controls">
+      <div class="theme-label">Choose a style</div>
+      <div class="theme-swatches">
+        <div class="swatch sw-ivory active" data-style="ivory"><div class="swatch-label">Ivory</div></div>
+        <div class="swatch sw-slate" data-style="slate"><div class="swatch-label">Slate</div></div>
+        <div class="swatch sw-stone" data-style="stone"><div class="swatch-label">Stone</div></div>
+        <div class="swatch sw-sage" data-style="sage"><div class="swatch-label">Sage</div></div>
+        <div class="swatch sw-dusk" data-style="dusk"><div class="swatch-label">Dusk</div></div>
+      </div>
+      <button class="modal-dl" id="saveImgBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PNG
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">where oops becomes oh.</div>
+  <span>Every crack lets in the light.</span>
+</footer>
+
+<script>
+// ── CARDS DATA ──
+const mistakeCards = [
+  { n:"01", t:"Teflon", y:"1938", d:"Roy Plunkett set out to make a new refrigerant. His pressurised gas tank read zero pressure — yet was too heavy to be empty. Inside: a slippery white powder. Non-stick cookware was born from a baffling anomaly." },
+  { n:"02", t:"Post-it Notes", y:"1968", d:"Spencer Silver created an adhesive so weak it was considered a failure. It sat unused for six years until a colleague needed a bookmark that wouldn't destroy his hymn book pages. A flaw became a feature." },
+  { n:"03", t:"Mauve", y:"1856", d:"William Perkin, aged 18, tried to synthesise quinine to cure malaria in his kitchen. He produced murky brown sludge that, diluted, turned brilliant purple — and accidentally started the entire synthetic dye industry." },
+  { n:"04", t:"Velcro", y:"1941", d:"George de Mestral returned from a hike covered in burrs. Instead of cursing them, he studied one under a microscope for two hours. The result was one of the world's most versatile fasteners." },
+  { n:"05", t:"Chocolate Chip Cookies", y:"1930", d:"Ruth Wakefield expected broken Nestlé chocolate to melt evenly into her batter. It stayed in chips. She served the 'ruined' cookies — and invented the most-reproduced recipe in history." },
+  { n:"06", t:"X-Rays", y:"1895", d:"Wilhelm Röntgen noticed a fluorescent screen glowing on the far side of his lab during cathode ray tests — far beyond any known ray's reach. Six weeks of secretive work followed. Medicine was never the same." },
+  { n:"07", t:"The Microwave Oven", y:"1945", d:"Percy Spencer walked past a magnetron and noticed the chocolate bar in his pocket had melted. Rather than throw it away, he grabbed some popcorn kernels and an egg. Two minutes later, the microwave oven existed." },
+  { n:"08", t:"Safety Glass", y:"1903", d:"Édouard Bénédictus dropped a glass flask coated in cellulose nitrate. It shattered but held its shape. He filed the idea away for a decade until newspaper reports of car windscreen injuries made it urgent." },
+  { n:"09", t:"The Pacemaker", y:"1956", d:"Wilson Greatbatch reached into a box of resistors and grabbed the wrong one. The resulting circuit pulsed rhythmically — matching a human heartbeat exactly. Two years later, the implantable pacemaker existed." },
+  { n:"10", t:"Vulcanised Rubber", y:"1839", d:"Charles Goodyear had been mocked for years over his rubber experiments. One day he accidentally dropped a rubber-sulphur mixture on a hot stove. Instead of melting, it charred like leather — and the tyre age began." },
+  { n:"11", t:"Brandy", y:"~1300s", d:"Wine merchants began concentrating wine to reduce shipping volume, intending to re-dilute it at the destination. One merchant tasted the concentrated product straight — and stopped adding water. Brandy was born from logistics." },
+  { n:"12", t:"Saccharin", y:"1879", d:"Constantin Fahlberg forgot to wash his hands after a day synthesising coal tar compounds. At dinner, his bread tasted extraordinarily sweet. He ran back and tasted every beaker until he found it — the world's first artificial sweetener." },
+];
+
+const grid = document.getElementById('cards');
+mistakeCards.forEach(m => {
+  const c = document.createElement('div');
+  c.className = 'card';
+  c.innerHTML = `<span class="card-index">${m.n}</span><div class="card-title">${m.t}</div><div class="card-year">${m.y}</div><div class="card-desc">${m.d}</div><div class="card-accent"></div>`;
+  grid.appendChild(c);
+});
+
+const cardObs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '0';
+      e.target.style.animation = `fadeUp 0.5s ease forwards ${i * 0.04}s`;
+      cardObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.card').forEach(c => { c.style.opacity = '0'; cardObs.observe(c); });
+
+// ── MARQUEE ──
+const marqueeItems = [
+  "Teflon — a refrigerant that stopped working","The microwave — a melted chocolate bar",
+  "Post-its — glue that was too weak","X-Rays — a glow from across the room",
+  "Velcro — a walk in the woods","Safety glass — a dropped flask",
+  "The pacemaker — the wrong resistor","Saccharin — forgetting to wash your hands",
+  "Brandy — wine no one bothered to dilute","Mauve — a failed cure for malaria",
+  "Vulcanised rubber — a spilled experiment","Cookies — chocolate that refused to melt",
+];
+const track = document.getElementById('marqueeTrack');
+[...marqueeItems, ...marqueeItems].forEach(text => {
+  const el = document.createElement('span');
+  el.className = 'marquee-item';
+  el.innerHTML = text + '<span class="marquee-sep">●</span>';
+  track.appendChild(el);
+});
+
+// ── CONFIG — set window.ANTHROPIC_KEY before loading, or use env proxy ──
+// In production: never hardcode. Use a backend proxy or env var.
+const API_KEY = (typeof window !== 'undefined' && window.ANTHROPIC_KEY) || '';
+
+// ── AI REFRAME ──
+let currentMistakeText = '', currentBeautyText = '', currentNoteText = '', currentTagText = '', currentLiNote = '';
+
+async function getAIReframe(mistakeText) {
+  const system = `You are a thoughtful, warm reframe coach for "The Most Beautiful Mistake."
+
+Read the specific mistake the person describes. Write a deeply personalised reframe that speaks directly to their exact situation. Never give generic wisdom — always reference what they actually said.
+
+Respond with ONLY a JSON object:
+{
+  "headline": "One powerful sentence (max 15 words) that reframes their specific mistake as a hidden gift or turning point. Must feel personal to what they described.",
+  "reflection": "2–3 sentences of warm, specific reflection. Reference details from their situation. Help them see what this particular experience gave them.",
+  "liNote": "1–2 sentences: a concrete positive action they took or can take NOW because of this mistake. Start with an active verb. Make it forward-facing and empowering — suitable for a LinkedIn post.",
+  "tag": "2–4 word category e.g. 'Career & Courage' or 'Love & Clarity'"
+}
+
+Rules: be specific not generic. Be warm not clinical. Acknowledge the difficulty briefly. Output ONLY valid JSON.`;
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 400,
+      system,
+      messages: [{ role: 'user', content: `My mistake: ${mistakeText}` }]
+    })
+  });
+  if (!res.ok) throw new Error('API failed');
+  const data = await res.json();
+  const raw = data.content[0].text.trim().replace(/^```json\s*/i,'').replace(/```$/,'').trim();
+  return JSON.parse(raw);
+}
+
+document.getElementById('transformBtn').addEventListener('click', async () => {
+  const input = document.getElementById('mistakeInput').value.trim();
+  if (!input) {
+    const w = document.getElementById('inputWrap');
+    w.classList.add('shake');
+    setTimeout(() => w.classList.remove('shake'), 500);
+    return;
+  }
+  const btn = document.getElementById('transformBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Reframing…';
+
+  try {
+    const r = await getAIReframe(input);
+    currentMistakeText = input;
+    currentBeautyText  = r.headline;
+    currentNoteText    = r.reflection;
+    currentTagText     = r.tag;
+    showResult(input, r.headline, r.reflection, r.tag, 'AI Reframed');
+  } catch(e) {
+    const fb = [
+      { headline:"You discovered a path you'd never have thought to walk.", reflection:"Every wrong turn is a map to somewhere unmapped. The detour you took was not a failure — it was an alternate route to a version of yourself that the original path could never have reached.", tag:"Discovery" },
+      { headline:"You proved you were brave enough to try.", reflection:"Only those who attempt things make mistakes. Inaction never fails — but it never grows either. You were in the arena, and that changes a person permanently.", tag:"Courage" },
+      { headline:"You learned something no textbook could ever teach.", reflection:"Mistakes are tuition paid to the school of lived experience. The knowledge you gained is yours forever — it compounds with time into wisdom no one can take from you.", tag:"Wisdom" },
+    ][Math.floor(Math.random()*3)];
+    currentMistakeText = input;
+    currentBeautyText  = fb.headline;
+    currentNoteText    = fb.reflection;
+    currentTagText     = fb.tag;
+    showResult(input, fb.headline, fb.reflection, fb.tag, 'Reframed');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = 'Reframe again →';
+});
+
+function showResult(mistake, headline, reflection, tag, label) {
+  document.getElementById('mistakeOld').textContent  = mistake;
+  document.getElementById('mistakeNew').textContent  = headline;
+  document.getElementById('mistakeNote').textContent = reflection;
+  document.getElementById('mistakeTag').textContent  = tag;
+  document.getElementById('revLabel').textContent    = label;
+  const rev = document.getElementById('revelation');
+  rev.classList.remove('visible'); void rev.offsetWidth; rev.classList.add('visible');
+  rev.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  setTimeout(() => { document.getElementById('downloadIgBtn').classList.add('show'); document.getElementById('downloadLiBtn').classList.add('show'); }, 400);
+
+  const cols = ['#7c3aed','#0891b2','#059669','#f59e0b','#db2777','#f43f5e'];
+  for (let i = 0; i < 14; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random()*7+3;
+    const col = cols[Math.floor(Math.random()*cols.length)];
+    const shape = Math.random() > 0.5 ? '50%' : '2px';
+    p.style.cssText = `width:${size}px;height:${size}px;background:${col};left:${Math.random()*100}vw;bottom:0;border-radius:${shape};animation-duration:${Math.random()*2+3}s;animation-delay:${Math.random()*0.6}s;`;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 5000);
+  }
+}
+
+document.getElementById('mistakeInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('transformBtn').click();
+});
+
+// ── INSTAGRAM CANVAS ──
+// 5 beautiful themes, each a distinct visual design
+const IG_THEMES = {
+  ivory: {
+    drawBg: (ctx,W,H) => {
+      ctx.fillStyle = '#faf6ee'; ctx.fillRect(0,0,W,H);
+      // subtle warm vignette
+      const g = ctx.createRadialGradient(W/2,H/2,W*0.2,W/2,H/2,W*0.8);
+      g.addColorStop(0,'rgba(200,169,110,0)'); g.addColorStop(1,'rgba(200,169,110,0.06)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    },
+    fg:'#111110', mid:'#6b6860', accent:'#c8a96e',
+    accentLine: '#c8a96e', tagBg:'#111110', tagFg:'#faf6ee',
+  },
+  slate: {
+    drawBg: (ctx,W,H) => {
+      ctx.fillStyle = '#1e3448'; ctx.fillRect(0,0,W,H);
+      const g = ctx.createRadialGradient(W*0.8,H*0.2,0,W*0.5,H*0.5,W*0.9);
+      g.addColorStop(0,'rgba(61,90,122,0.5)'); g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    },
+    fg:'#f0ebe2', mid:'rgba(240,235,226,0.55)', accent:'#c8a96e',
+    accentLine:'rgba(200,169,110,0.5)', tagBg:'#c8a96e', tagFg:'#1e3448',
+  },
+  stone: {
+    drawBg: (ctx,W,H) => {
+      ctx.fillStyle = '#2d2926'; ctx.fillRect(0,0,W,H);
+      const g = ctx.createLinearGradient(0,0,W,H);
+      g.addColorStop(0,'rgba(61,52,45,0.8)'); g.addColorStop(1,'rgba(17,17,16,0)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    },
+    fg:'#f5f0e8', mid:'rgba(245,240,232,0.5)', accent:'#c8a96e',
+    accentLine:'rgba(200,169,110,0.4)', tagBg:'rgba(200,169,110,0.15)', tagFg:'#c8a96e',
+  },
+  sage: {
+    drawBg: (ctx,W,H) => {
+      ctx.fillStyle = '#e8f0e8'; ctx.fillRect(0,0,W,H);
+      const g = ctx.createRadialGradient(W*0.2,H*0.8,0,W*0.5,H*0.5,W*0.8);
+      g.addColorStop(0,'rgba(90,122,95,0.08)'); g.addColorStop(1,'rgba(90,122,95,0)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    },
+    fg:'#1e2e20', mid:'rgba(30,46,32,0.5)', accent:'#3a5c3e',
+    accentLine:'rgba(58,92,62,0.35)', tagBg:'#3a5c3e', tagFg:'#e8f0e8',
+  },
+  dusk: {
+    drawBg: (ctx,W,H) => {
+      const g = ctx.createLinearGradient(0,0,W,H);
+      g.addColorStop(0,'#1a1a2e'); g.addColorStop(0.5,'#2d1b4e'); g.addColorStop(1,'#1a1a2e');
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+      // star-like dots
+      ctx.fillStyle='rgba(200,169,110,0.15)';
+      for(let i=0;i<60;i++){
+        const x=Math.sin(i*137.5)*W*0.45+W/2, y=Math.cos(i*97.3)*H*0.45+H/2;
+        ctx.beginPath(); ctx.arc(x,y,1.5,0,Math.PI*2); ctx.fill();
+      }
+    },
+    fg:'#f0ecff', mid:'rgba(240,236,255,0.5)', accent:'#c8a96e',
+    accentLine:'rgba(200,169,110,0.4)', tagBg:'rgba(200,169,110,0.15)', tagFg:'#c8a96e',
+  },
+};
+
+// Polyfill roundRect for older browsers
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    if (w < 2*r) r = w/2; if (h < 2*r) r = h/2;
+    this.beginPath();
+    this.moveTo(x+r, y);
+    this.arcTo(x+w, y,   x+w, y+h, r);
+    this.arcTo(x+w, y+h, x,   y+h, r);
+    this.arcTo(x,   y+h, x,   y,   r);
+    this.arcTo(x,   y,   x+w, y,   r);
+    this.closePath(); return this;
+  };
+}
+
+function wrapLines(ctx, text, maxWidth) {
+  const words = text.split(' '), lines = []; let line = '';
+  for (const w of words) {
+    const test = line ? line+' '+w : w;
+    if (ctx.measureText(test).width > maxWidth && line) { lines.push(line); line=w; }
+    else line = test;
+  }
+  lines.push(line); return lines;
+}
+
+function drawPost(style, mode='ig') {
+  if (mode === 'li') { drawLinkedIn(style); return; }
+  const canvas = document.getElementById('igCanvas');
+  const ctx = canvas.getContext('2d');
+  const T = IG_THEMES[style];
+  const W=1080, H=1080, P=100, IW=W-P*2;
+
+  ctx.clearRect(0,0,W,H);
+  T.drawBg(ctx,W,H);
+
+  // ── ghost watermark word — pushed to lower-right ──
+  ctx.save();
+  ctx.globalAlpha = 0.04;
+  ctx.font = 'italic 400 340px Georgia, serif';
+  ctx.fillStyle = T.fg;
+  ctx.textAlign = 'right';
+  ctx.fillText('oops', W-P+20, H-P+40);
+  ctx.restore();
+
+  // ── top thin accent line ──
+  ctx.fillStyle = T.accent; ctx.fillRect(P, P, IW, 2);
+
+  // ── overline label ──
+  ctx.fillStyle = T.accent;
+  ctx.font = '500 21px "DM Sans", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('THE MOST BEAUTIFUL MISTAKE', P, P+50);
+
+  // ── struck-through original ──
+  const ms = currentMistakeText.length>68 ? currentMistakeText.slice(0,68)+'…' : currentMistakeText;
+  ctx.font = 'italic 300 28px Georgia, serif';
+  ctx.fillStyle = T.mid;
+  ctx.fillText(ms, P, P+100);
+  const mw = ctx.measureText(ms).width;
+  ctx.strokeStyle = T.mid; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(P, P+92); ctx.lineTo(P+mw, P+92); ctx.stroke();
+
+  // ── divider ──
+  ctx.strokeStyle = T.accentLine; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(P, P+128); ctx.lineTo(W-P, P+128); ctx.stroke();
+
+  // ── main headline — generous vertical space ──
+  ctx.font = 'italic 400 66px Georgia, serif';
+  ctx.fillStyle = T.fg;
+  const bLines = wrapLines(ctx, currentBeautyText, IW);
+  const bY = P + 220;
+  const bLH = 82;
+  bLines.forEach((l,i) => ctx.fillText(l, P, bY + i*bLH));
+
+  // ── spacer then reflection — well below headline ──
+  const afterHeadline = bY + bLines.length*bLH;
+  const nY = afterHeadline + 64;
+
+  ctx.font = '300 27px "DM Sans", sans-serif';
+  ctx.fillStyle = T.mid;
+  const noteLines = wrapLines(ctx, currentNoteText, IW);
+  noteLines.forEach((l,i) => ctx.fillText(l, P, nY + i*42));
+
+  // ── tag pill — pinned well above footer ──
+  const tagAreaTop = H - P - 120;
+  ctx.font = '500 19px "DM Sans", sans-serif';
+  const tagW = ctx.measureText(currentTagText).width + 36;
+  const tagH = 34;
+  ctx.fillStyle = T.tagBg;
+  ctx.beginPath();
+  ctx.roundRect(P, tagAreaTop, tagW, tagH, tagH/2);
+  ctx.fill();
+  ctx.fillStyle = T.tagFg;
+  ctx.fillText(currentTagText, P+18, tagAreaTop + tagH - 9);
+
+  // ── bottom rule ──
+  ctx.strokeStyle = T.accentLine; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(P, H-P-48); ctx.lineTo(W-P, H-P-48); ctx.stroke();
+
+  // ── brand signature ──
+  ctx.fillStyle = T.accent;
+  ctx.font = 'italic 400 23px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('where oops becomes oh.', W/2, H-P-14);
+}
+
+let currentIgStyle = 'ivory';
+
+// Modal mode: 'ig' or 'li'
+let modalMode = 'ig';
+
+async function openModal(mode) {
+  modalMode = mode;
+  currentIgStyle = 'ivory';
+  document.querySelectorAll('.swatch').forEach(s => s.classList.toggle('active', s.dataset.style==='ivory'));
+  const title = document.getElementById('modalTitle');
+  const wrap  = document.getElementById('canvasWrap');
+  if (mode === 'ig') {
+    title.textContent = 'Instagram post — 1080 × 1080';
+    document.getElementById('igCanvas').width  = 1080;
+    document.getElementById('igCanvas').height = 1080;
+    wrap.style.aspectRatio = '1';
+    drawPost('ivory', 'ig');
+  } else {
+    title.textContent = 'LinkedIn banner — 1200 × 627';
+    document.getElementById('igCanvas').width  = 1200;
+    document.getElementById('igCanvas').height = 627;
+    wrap.style.aspectRatio = '1200/627';
+    drawPost('ivory', 'li');
+  }
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function drawLinkedIn(style) {
+  const canvas = document.getElementById('igCanvas');
+  const ctx = canvas.getContext('2d');
+  const T = IG_THEMES[style];
+  const W=1200, H=627, P=80;
+
+  ctx.clearRect(0,0,W,H);
+  T.drawBg(ctx,W,H);
+
+  // Ghost word bottom-right — subtle texture
+  ctx.save();
+  ctx.globalAlpha = 0.04;
+  ctx.font = 'italic 400 260px Georgia, serif';
+  ctx.fillStyle = T.fg;
+  ctx.textAlign = 'right';
+  ctx.fillText('oops', W-P+30, H-P+50);
+  ctx.restore();
+
+  // Columns: left 50% headline, right 50% action
+  const midX = W * 0.50;
+
+  // ── TOP ACCENT LINE ──
+  ctx.fillStyle = T.accent;
+  ctx.fillRect(P, P, W-P*2, 2);
+
+  // ── LEFT COLUMN ──
+  // Overline label
+  ctx.fillStyle = T.accent;
+  ctx.font = '500 15px "DM Sans", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('THE MOST BEAUTIFUL MISTAKE', P, P+44);
+
+  // Struck-through original mistake
+  const ms = currentMistakeText.length>50 ? currentMistakeText.slice(0,50)+'…' : currentMistakeText;
+  ctx.font = 'italic 300 21px Georgia, serif';
+  ctx.fillStyle = T.mid;
+  ctx.fillText(ms, P, P+76);
+  const mw = ctx.measureText(ms).width;
+  ctx.strokeStyle = T.mid; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(P, P+69); ctx.lineTo(P+mw, P+69); ctx.stroke();
+
+  // Divider under mistake
+  ctx.strokeStyle = T.accentLine; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(P, P+96); ctx.lineTo(midX-48, P+96); ctx.stroke();
+
+  // Headline — large, well spaced, vertically centred in left half
+  ctx.font = 'italic 400 46px Georgia, serif';
+  ctx.fillStyle = T.fg;
+  const leftColW = midX - P - 56;
+  const bLines = wrapLines(ctx, currentBeautyText, leftColW);
+  // Centre the block vertically in remaining space
+  const remainH = H - (P+120) - (P+40);
+  const bLH = 60;
+  const blockH = bLines.length * bLH;
+  const bY = P + 120 + Math.max(0, (remainH - blockH) / 2);
+  bLines.forEach((l,i) => ctx.fillText(l, P, bY + i*bLH));
+
+  // ── VERTICAL DIVIDER ──
+  ctx.strokeStyle = T.accentLine; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(midX, P+16); ctx.lineTo(midX, H-P-16); ctx.stroke();
+
+  // ── RIGHT COLUMN ──
+  const rx = midX + 48;
+  const rColW = W - rx - P;
+
+  // Section header
+  ctx.fillStyle = T.accent;
+  ctx.font = '600 14px "DM Sans", sans-serif';
+  ctx.letterSpacing = '0.08em';
+  ctx.fillText('WHAT THIS UNLOCKED', rx, P+44);
+  ctx.letterSpacing = '0';
+
+  // Divider under header
+  ctx.strokeStyle = T.accentLine; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(rx, P+58); ctx.lineTo(W-P, P+58); ctx.stroke();
+
+  // Action text — generous line height, full column width
+  ctx.font = '300 22px "DM Sans", sans-serif';
+  ctx.fillStyle = T.fg;
+  const actionText = currentLiNote || currentNoteText;
+  const actionLines = wrapLines(ctx, actionText, rColW);
+  const aStartY = P + 96;
+  const aLH = 38;
+  actionLines.slice(0, 9).forEach((l, i) => {
+    if (i === 0) {
+      // First line gets arrow prefix
+      ctx.fillText('→  ' + l, rx, aStartY + i*aLH);
+    } else {
+      ctx.fillText('    ' + l, rx, aStartY + i*aLH);
+    }
+  });
+
+  // ── BOTTOM ROW ──
+  // Tag pill — bottom left
+  ctx.font = '500 15px "DM Sans", sans-serif';
+  const tagW2 = ctx.measureText(currentTagText).width + 28;
+  ctx.fillStyle = T.tagBg;
+  ctx.beginPath(); ctx.roundRect(P, H-P-34, tagW2, 30, 15); ctx.fill();
+  ctx.fillStyle = T.tagFg;
+  ctx.fillText(currentTagText, P+14, H-P-12);
+
+  // Brand — bottom centre
+  ctx.fillStyle = T.accent;
+  ctx.font = 'italic 400 17px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('where oops becomes oh.', W/2, H-P-12);
+}
+
+document.getElementById('downloadIgBtn').addEventListener('click', () => openModal('ig'));
+document.getElementById('downloadLiBtn').addEventListener('click', () => openModal('li'));
+
+document.querySelectorAll('.swatch').forEach(sw => {
+  sw.addEventListener('click', () => {
+    currentIgStyle = sw.dataset.style;
+    document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+    sw.classList.add('active');
+    drawPost(currentIgStyle, modalMode);
+  });
+});
+
+document.getElementById('modalClose').addEventListener('click', () =>
+  document.getElementById('modalOverlay').classList.remove('open'));
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay'))
+    document.getElementById('modalOverlay').classList.remove('open');
+});
+document.getElementById('saveImgBtn').addEventListener('click', () => {
+  const canvas = document.getElementById('igCanvas');
+  const suffix = modalMode === 'li' ? 'linkedin' : 'instagram';
+  const filename = `beautiful-mistake-${suffix}-${currentIgStyle}.png`;
+
+  try {
+    // Method 1: toBlob (most reliable, avoids tainted-canvas issues)
+    canvas.toBlob((blob) => {
+      if (!blob) { fallbackDownload(); return; }
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }, 'image/png');
+  } catch(e) {
+    fallbackDownload();
+  }
+
+  function fallbackDownload() {
+    // Method 2: dataURL fallback
+    try {
+      const dataURL = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataURL;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch(e2) {
+      // Method 3: open in new tab so user can save manually
+      const dataURL = canvas.toDataURL('image/png');
+      window.open(dataURL, '_blank');
+    }
+  }
+});
+
+</script>
+</body>
+</html>
