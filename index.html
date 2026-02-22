@@ -910,16 +910,11 @@ Respond with ONLY a JSON object:
 
 Rules: be specific not generic. Be warm not clinical. Acknowledge the difficulty briefly. Output ONLY valid JSON.`;
 
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 400,
-      system,
-      messages: [{ role: 'user', content: `My mistake: ${mistakeText}` }]
-    })
-  });
+ const res = await fetch('/api/reframe', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ mistakeText, system })
+});
   if (!res.ok) throw new Error('API failed');
   const data = await res.json();
   const raw = data.content[0].text.trim().replace(/^```json\s*/i,'').replace(/```$/,'').trim();
